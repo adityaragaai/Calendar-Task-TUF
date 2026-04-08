@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   format,
   addMonths,
@@ -46,8 +46,19 @@ const InteractiveCalendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedRange, setSelectedRange] = useState<DateRange>({ start: null, end: null });
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
-  const [notes, setNotes] = useState<Record<string, string>>({});
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    if (typeof window !== 'undefined') {
+      const savedNotes = localStorage.getItem('calendar-notes');
+      return savedNotes ? JSON.parse(savedNotes) : {};
+    }
+    return {};
+  });
   const [isFlipping, setIsFlipping] = useState(false);
+
+  // Persistence: Save notes to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('calendar-notes', JSON.stringify(notes));
+  }, [notes]);
 
   const theme = monthThemes[currentDate.getMonth()] ?? monthThemes[0];
 
