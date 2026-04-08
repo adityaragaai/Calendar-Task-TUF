@@ -8,7 +8,7 @@ Developed using **React, TypeScript, and Framer Motion** with a focus on **smoot
 
 ## 🎥 Live Demo 🚀
 
-👉 [View Project](https://calendar-task-tuf.vercel.app/)  
+👉 [View Project Live]  
 🔗 https://calendar-task-tuf.vercel.app/
 
 
