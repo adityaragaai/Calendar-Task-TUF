@@ -1,38 +1,56 @@
-# Interactive Wall Calendar Component
+# 📅 Interactive Calendar Component
 
-A polished, interactive React component inspired by physical wall calendars. Built with React, TypeScript, and Framer Motion for the Frontend Engineering Challenge.
+> ⚡ Built for a Frontend Engineering Challenge — focused on UI/UX, animations, and real-world component design.
+
+A polished and interactive calendar component inspired by physical wall calendars.  
+Developed using **React, TypeScript, and Framer Motion** with a focus on **smooth animations, clean architecture, and responsive design**.
+
+## 🎥 Demo 
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/968938f8-4b24-4e86-b132-90f02afec8f0" width="100%" />
+</p>
+
+
 
 ## ✨ Features
 
-- **Wall Calendar Aesthetic**: Faithfully recreates the look of a physical wall calendar with spiral binding and high-quality imagery.
-- **Dynamic Themes**: Every month features a unique high-resolution hero image and a coordinated color palette.
-- **Smart Date Selection**: select start and end dates with clear visual indicators for the range.
-- **Integrated Monthly Memos**: Each month has its own dedicated notes area for general memos.
-- **3D Page Flip Animation**: Smooth transition effects when navigating between months using Framer Motion.
-- **Fully Responsive**: Adapts seamlessly from desktop layouts to mobile-optimized stacked views.
-- **Today Highlight**: Instant visual tracking of the current date with a subtle pulse animation.
+- Realistic **wall calendar UI** with modern styling  
+- **Date range selection** with clear visual feedback  
+- Smooth **3D page flip animations**  
+- **Dynamic monthly themes** with images  
+- **Today highlight** with animation  
+- **Fully responsive design**  
+- Integrated **monthly notes section**
 
-## 🛠️ Tech Stack
+---
 
-- **Framework**: React (with TypeScript)
-- **Styling**: Vanilla CSS (Modern CSS variables)
-- **Animation**: Framer Motion
-- **Icons**: Lucide React
-- **Date Handling**: date-fns
+## ⚙️ Design & Development Choices
 
-## 🚀 Getting Started
+- **React + TypeScript**  
+  Used for scalable, maintainable, and type-safe component development.
 
-### Prerequisites
+- **Framer Motion**  
+  Implemented smooth transitions and 3D animations to enhance user experience.
 
-- Node.js (v16.x or higher)
-- npm or yarn
+- **date-fns**  
+  Simplified complex date operations like range selection, comparison, and formatting.
 
-### Installation
+- **Custom CSS (No UI Libraries)**  
+  Built from scratch using modern CSS for full control over design and layout.
+
+- **Component-Based Architecture**  
+  Clear separation of UI, logic, and types for better readability and reuse.
+
+---
+
+## 🚀 How to Run Locally
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   git clone https://github.com/adityaragaai/Calendar-Task-TUF.git
+   cd Calendar-Task-TUF
    ```
 
 2. Install dependencies:
@@ -45,16 +63,36 @@ A polished, interactive React component inspired by physical wall calendars. Bui
    npm run dev
    ```
 
-The application will be available at `http://localhost:5173`.
+4. Open in browser:
+   ```
+   http://localhost:5173
+   ```
+
+---
 
 ## 🏗️ Project Structure
 
-- `src/components/InteractiveCalendar.tsx`: The core functional component.
-- `src/index.css`: Modern, modular CSS for all styling and animations.
-- `src/types/`: TypeScript interfaces and definitions.
+```
+src/
+ ├── components/
+ │    └── InteractiveCalendar.tsx
+ ├── types/
+ ├── assets/
+ ├── App.tsx
+ └── main.tsx
+```
 
-## 📝 Design Choices
+---
 
-- **Geometric Overlays**: Used custom SVG paths with gradients to create a modern "wave" effect that bridges the hero image and the calendar grid.
-- **Refined Typography**: Utilizes the 'Outfit' font family for a premium, contemporary feel.
-- **Minimalist Controls**: Simplified navigation controls to prioritize the calendar's visual impact.
+## 🎯 Focus Areas
+
+- UI/UX Design  
+- Smooth Animations  
+- Clean Code Structure  
+- Real-world Component Development  
+
+---
+
+## 🔗 Source Code
+
+👉 https://github.com/adityaragaai/Calendar-Task-TUF
