@@ -1,0 +1,6 @@
+/* Reset or leave empty since index.css handles everything */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
