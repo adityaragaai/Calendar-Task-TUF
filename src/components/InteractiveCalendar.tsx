@@ -13,8 +13,14 @@ import {
   isWithinInterval,
   isBefore,
 } from 'date-fns';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Trash2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Trash2, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export interface DateRange {
   start: Date | null;
@@ -96,23 +102,37 @@ const InteractiveCalendar: React.FC = () => {
         const isRangeStart = selectedRange.start && isSameDay(day, selectedRange.start);
         const isRangeEnd = selectedRange.end && isSameDay(day, selectedRange.end);
 
+        const isHovered = hoverDate && isSameDay(day, hoverDate);
+
         days.push(
           <div
             key={day.toString()}
-            className={[
-              'day-cell',
-              !isCurrentMonth ? 'empty' : '',
-              isSelected ? 'selected' : '',
-              inRange ? 'in-range' : '',
-              isToday ? 'today' : '',
-              isRangeStart ? 'range-start' : '',
-              isRangeEnd ? 'range-end' : '',
-              isWeekend && isCurrentMonth && !isSelected ? 'weekend-text' : '',
-            ].join(' ')}
+            className={cn(
+              'day-cell transition-all duration-200 ease-in-out',
+              !isCurrentMonth && 'empty pointer-events-none opacity-25',
+              isCurrentMonth && 'cursor-pointer',
+              isSelected && 'selected scale-105 shadow-lg z-10',
+              inRange && !isSelected && 'in-range',
+              isToday && 'today',
+              isRangeStart && 'range-start',
+              isRangeEnd && 'range-end',
+              isWeekend && isCurrentMonth && !isSelected && !inRange && 'weekend-text',
+              isHovered && isCurrentMonth && !isSelected && 'bg-primary/10 scale-110 shadow-md ring-2 ring-primary/30 z-10'
+            )}
             onClick={() => isCurrentMonth && handleDateClick(cloneDay)}
-            onMouseEnter={() => setHoverDate(cloneDay)}
+            onMouseEnter={() => isCurrentMonth && setHoverDate(cloneDay)}
+            onMouseLeave={() => setHoverDate(null)}
           >
-            <span>{formattedDate}</span>
+            <span className="relative z-10">{formattedDate}</span>
+            {isHovered && isCurrentMonth && (
+              <motion.div 
+                layoutId="hover-outline"
+                className="absolute inset-0 rounded-lg bg-primary/5 "
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+            )}
           </div>
         );
         day = addDays(day, 1);
@@ -158,33 +178,60 @@ const InteractiveCalendar: React.FC = () => {
         </div>
         <div className="selection-details">
           <div className="selection-label">Selection Details</div>
-          <div className="selection-box">
-            {selectedRange.start ? (
-              <div className="selection-content">
-                <div className="selection-dates">
-                  <CalendarIcon size={12} />
-                  <span>{format(selectedRange.start, 'MMM d, yyyy')}</span>
-                  {selectedRange.end && (
-                    <>
-                      <ChevronRight size={12} />
-                      <span>{format(selectedRange.end, 'MMM d, yyyy')}</span>
-                    </>
-                  )}
-                </div>
-                <button
-                  onClick={() => {
-                    setSelectedRange({ start: null, end: null });
-                    const monthKey = format(currentDate, 'yyyy-MM');
-                    setNotes({ ...notes, [monthKey]: '' });
-                  }}
-                  className="clear-btn"
+          <div className="selection-box relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              {selectedRange.start ? (
+                <motion.div 
+                  key="selection"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="selection-content"
                 >
-                  <Trash2 size={12} />
-                </button>
-              </div>
-            ) : (
-              <p className="selection-placeholder">Select a date range on the grid</p>
-            )}
+                  <div className="selection-dates">
+                    <CalendarIcon size={12} className="text-primary" />
+                    <span>{format(selectedRange.start, 'MMM d, yyyy')}</span>
+                    {selectedRange.end && (
+                      <>
+                        <ChevronRight size={12} className="text-slate-300" />
+                        <span>{format(selectedRange.end, 'MMM d, yyyy')}</span>
+                      </>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setSelectedRange({ start: null, end: null });
+                      const monthKey = format(currentDate, 'yyyy-MM');
+                      setNotes({ ...notes, [monthKey]: '' });
+                    }}
+                    className="clear-btn hover:bg-red-50 p-1 rounded-full transition-colors"
+                    title="Clear selection and notes"
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                </motion.div>
+              ) : hoverDate ? (
+                <motion.div 
+                  key="hover"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex items-center gap-2 text-[0.72rem] text-primary font-medium"
+                >
+                  <Info size={12} />
+                  <span>Preview: {format(hoverDate, 'EEEE, MMM do')}</span>
+                </motion.div>
+              ) : (
+                <motion.p 
+                  key="placeholder"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="selection-placeholder"
+                >
+                  Select a date range on the grid
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
