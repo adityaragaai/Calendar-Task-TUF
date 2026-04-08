@@ -5,8 +5,11 @@
 A polished and interactive calendar component inspired by physical wall calendars.  
 Developed using **React, TypeScript, and Framer Motion** with a focus on **smooth animations, clean architecture, and responsive design**.
 
-## 🎥 Demo Link
-[Live Demo](https://calendar-task-tuf.vercel.app/)
+
+## 🎥 Live Demo 🚀
+
+👉 [View Project](https://calendar-task-tuf.vercel.app/)  
+🔗 https://calendar-task-tuf.vercel.app/
 
 
 <p align="center">
