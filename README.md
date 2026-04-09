@@ -28,6 +28,7 @@ Developed using **React, TypeScript, and Framer Motion** with a focus on **smoot
 - **Fully responsive design**  
 - Integrated **monthly notes section**
 - **Notes persistence using localStorage** (data remains saved even after page refresh)
+- 👉 Youtube video link Explaining all Feature: https://youtu.be/Liz70OSf3QA
 
 ---
 
