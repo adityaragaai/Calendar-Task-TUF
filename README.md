@@ -6,9 +6,9 @@ A polished and interactive calendar component inspired by physical wall calendar
 Developed using **React, TypeScript, and Framer Motion** with a focus on **smooth animations, clean architecture, and responsive design**.
 
 
-## 🎥 Live Demo 🚀
+## Live Demo 🚀
 
-👉 [View Project Live]  
+👉 View Project Live
 🔗 https://calendar-task-tuf.vercel.app/
 
 
@@ -27,6 +27,7 @@ Developed using **React, TypeScript, and Framer Motion** with a focus on **smoot
 - **Today highlight** with animation  
 - **Fully responsive design**  
 - Integrated **monthly notes section**
+- **Notes persistence using localStorage** (data remains saved even after page refresh)
 
 ---
 
@@ -74,19 +75,6 @@ Developed using **React, TypeScript, and Framer Motion** with a focus on **smoot
 
 ---
 
-## 🏗️ Project Structure
-
-```
-src/
- ├── components/
- │    └── InteractiveCalendar.tsx
- ├── types/
- ├── assets/
- ├── App.tsx
- └── main.tsx
-```
-
----
 
 ## 🎯 Focus Areas
 
